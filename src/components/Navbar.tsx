@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import Logo from "./Logo";
 
 const Navbar: React.FC = () => {
   const [highlightStyle, setHighlightStyle] = useState<React.CSSProperties>({});
   const [isOpen, setIsOpen] = useState(false);
 
-  const sections = ["about", "projects", "blogs"];
-  const mobileSections = ["about", "projects", "blogs", "contact"];
+  // Memoize the sections array
+  const sections = useMemo(() => ["about", "projects", "blogs"], []);
+  const mobileSections = useMemo(
+    () => ["about", "projects", "blogs", "contact"],
+    []
+  );
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     const currentSection = sections.find((section) => {
       const element = document.getElementById(section);
       if (!element) return false;
@@ -28,12 +32,12 @@ const Navbar: React.FC = () => {
         });
       }
     }
-  };
+  }, [sections]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [handleScroll]);
 
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
