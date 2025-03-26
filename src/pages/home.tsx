@@ -108,7 +108,7 @@ const Home: React.FC = () => {
               </a>
             </div>
             <div className="lg:mt-20 hidden md:block">
-              <img src="profile.png" alt="Profile Image" />
+              <img src="profile.png" alt="prashanth" />
             </div>
             <div className="flex md:flex-col gap-4 absolute -mt-10 md:mt-0 right-16 md:right-2 lg:right-32 lg:mt-10">
               <hr className="rotate-90 border-black border mb-4 hidden md:block" />
@@ -121,6 +121,7 @@ const Home: React.FC = () => {
               >
                 <img
                   src={linkdin}
+                  alt="linkdin"
                   className="border-2 border-gray-700 p-1 rounded-full cursor-pointers"
                 />
               </a>
@@ -131,6 +132,7 @@ const Home: React.FC = () => {
               >
                 <img
                   src={github}
+                  alt="github"
                   className="border-2 border-gray-700 p-1 rounded-full cursor-pointer"
                 />
               </a>
