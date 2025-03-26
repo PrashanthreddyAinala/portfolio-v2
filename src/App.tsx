@@ -7,7 +7,7 @@ import Blogs from "./pages/blogs";
 
 const App: React.FC = () => {
   return (
-    <>
+    <div className="bg-gray-100 md:bg-gray-50">
       <Navbar />
       <section id="about">
         <Home />
@@ -21,7 +21,7 @@ const App: React.FC = () => {
       <section id="contact">
         <Contact />
       </section>
-    </>
+    </div>
   );
 };
 

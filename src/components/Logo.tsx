@@ -14,7 +14,7 @@ const Logo: React.FC = () => {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <circle cx="50" cy="50" r="50" stroke="currentColor" strokeWidth="5" />
+                <circle cx="50" cy="50" r="50" stroke="currentColor" strokeWidth="3" />
               </svg>
             </div>
             <span className="relative z-10">PR</span>

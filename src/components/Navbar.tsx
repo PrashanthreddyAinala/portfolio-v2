@@ -6,7 +6,7 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   // Memoize the sections array
-  const sections = useMemo(() => ["about", "projects", "blogs"], []);
+  const sections = useMemo(() => ["about", "projects", "blogs", 'contact'], []);
   const mobileSections = useMemo(
     () => ["about", "projects", "blogs", "contact"],
     []
@@ -48,7 +48,7 @@ const Navbar: React.FC = () => {
 
   return (
     <div className="sticky top-0 lg:top-6 z-20">
-      <div className="relative bg-white lg:rounded-lg shadow-sm px-4 w-full lg:w-1/2 3xl:max-w-2xl h-12 mx-auto">
+      <div className="relative bg-white lg:rounded-lg shadow-sm px-4 w-full lg:w-2/3 h-12 mx-auto">
         <div className="relative flex justify-between items-center h-12">
           <div className="text-xl font-bold text-gray-800">
             <div
@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
           </div>
           <div className="relative hidden md:flex space-x-6">
             <span
-              className="absolute top-1 left-0 h-8 bg-gradient-to-b from-gray-100 to-gray-200 rounded-lg transition-all duration-300"
+              className="absolute top-1 left-0 h-8 bg-gradient-to-b from-gray-200 to-gray-300 rounded-lg transition-all duration-300"
               style={highlightStyle}
             ></span>
             {sections.map((section) => (

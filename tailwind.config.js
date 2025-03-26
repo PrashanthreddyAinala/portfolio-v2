@@ -7,12 +7,12 @@ module.exports = {
         Lobster: ["Lobster", "cursive"],
         Poppins: ["Poppins", "sans-serif"],
       },
-      backgroundImage: (theme) => ({
-        "gradient-text": "linear-gradient(to right, #ff7e5f, #feb47b)",
-      }),
-
       colors: {
         indigo: "#4F46E5",
+        primary: "#3366FF",
+        secondary: "#1a53ff",
+        gray1: "#f7f9ff",
+        gray2: "#c4c4c4",
       },
       screens: {
         "3xl": "1600px",
