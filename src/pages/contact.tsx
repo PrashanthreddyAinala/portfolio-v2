@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+'use client';
+
+import React, { useRef, useState, FormEvent } from "react";
 import email from "../assets/images/email.png";
 import phone from "../assets/images/phone.png";
 import map from "../assets/images/map-pin.svg";
+import emailjs from '@emailjs/browser';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -11,23 +15,44 @@ const Contact = () => {
     phone: "",
     message: "",
   });
+  const formRef = useRef<HTMLFormElement | null>(null);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+
     e.preventDefault();
-    // Handle form submission (e.g., send data to server)
-    console.log(formData);
-    setFormData({
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      message: "",
-    });
+
+    emailjs
+      .send(
+        process.env.REACT_APP_PUBLIC_EMAIL_SERVICE_ID as string,
+        process.env.REACT_APP_PUBLIC_EMAIL_TEMPLATE_ID as string,
+        {
+          name: `${formData.firstName} ${formData.lastName}`,
+          email: formData.email,
+          time: new Date().toLocaleString(),
+          message: `${formData.message}. ${formData.phone}`,
+        },
+        process.env.REACT_APP_PUBLIC_EMAIL_USER_ID as string
+      )
+      .then(
+        (result) => {
+          toast("Message sent successfully!");
+          setFormData({
+            firstName: "",
+            lastName: "",
+            email: "",
+            phone: "",
+            message: "",
+          });
+        },
+        (error) => {
+          toast.error("Failed to send message. Please try again.");
+        }
+      );
   };
 
   return (
@@ -69,20 +94,20 @@ const Contact = () => {
                   <p className="text-gray-600">+91 9553971082</p>
                 </div>
               </a>
-                <div className="flex items-center gap-2 my-4">
-                  <img
-                    src={map}
-                    alt=""
-                    className="border-2 p-1 rounded-full"
-                  />
-                  <p className="text-gray-600">Hyderabad, Telangana, India.</p>
-                </div>
+              <div className="flex items-center gap-2 my-4">
+                <img
+                  src={map}
+                  alt=""
+                  className="border-2 p-1 rounded-full"
+                />
+                <p className="text-gray-600">Hyderabad, Telangana, India.</p>
+              </div>
             </div>
           </div>
 
           {/* Right Side - Contact Form */}
           <div className="bg-white p-8 rounded-lg border shadow-md">
-            <form onSubmit={handleSubmit}>
+            <form ref={formRef} onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label
@@ -186,6 +211,7 @@ const Contact = () => {
       <div>
         <p className="text-center text-gray-400 font-semibold">© 2025 Prashanth Reddy Ainala. All rights reserved.</p>
       </div>
+      <ToastContainer />
     </div>
   );
 };
